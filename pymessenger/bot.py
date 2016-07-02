@@ -17,6 +17,23 @@ class Bot(object):
             appsecret_proof = generate_appsecret_proof(access_token, app_secret)
             self.base_url += '&appsecret_proof={0}'.format(appsecret_proof)
 
+    def get_user_info(self, recipient_id):
+
+        url = ("https://graph.facebook.com/v{0}/{1}?access_token={2}" + \
+               "&fields=first_name,last_name,profile_pic,locale,timezone,gender"
+              ).format(self.api_version, recipient_id, self.access_token)
+        r = requests.get(url)
+        return r.json()
+
+    def send_typing(self, recipient_id):
+        payload = {
+            'recipient': {
+                'id': recipient_id
+            },
+            'sender_action': 'typing_on'
+        }
+        return self._send_payload(payload)
+
     def send_text_message(self, recipient_id, message):
         payload = {
             'recipient': {

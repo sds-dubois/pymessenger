@@ -34,6 +34,18 @@ class Bot(object):
         }
         return self._send_payload(payload)
 
+    def send_quick_replies(self, recipient_id, text, quick_replies):
+        payload = {
+            'recipient': {
+                'id': recipient_id
+            },
+            'message': {
+                'text': text,
+                'quick_replies' : quick_replies
+            }
+        }
+        return self._send_payload(payload)
+
     def send_text_message(self, recipient_id, message):
         payload = {
             'recipient': {

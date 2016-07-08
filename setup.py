@@ -2,7 +2,7 @@ from setuptools import setup
 setup(
   name = 'pymessenger',
   packages = ['pymessenger'],
-  version = '0.0.5.0',
+  version = '0.0.5.1',
   install_requires=[
         'requests',
         'requests-toolbelt'
